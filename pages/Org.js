@@ -15,15 +15,16 @@ export default function CorporateForm() {
     let newdata = {"member": "corporate", ...formdata}
     setData(newdata)
 
-    console.log("set data", data); // unclear why this isn't updated immediately
+    console.log("set data", data);
+     // unclear why this isn't updated immediately
 
     console.log("new data", newdata);
-    console.log("errors", errors);
+    //console.log("errors", errors);
     
     const res = await fetch("/api/sendgrid", {
       body: JSON.stringify({
         type: "corporate",
-        message: data,
+        message: newdata,
       }),
       headers: {
         "Content-Type": "application/json",
