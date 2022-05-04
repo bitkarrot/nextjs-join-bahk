@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {useState} from 'react';
 
 import { useForm } from 'react-hook-form';
@@ -14,6 +14,10 @@ export default function CorporateForm() {
   const [data, setData] = useState("");
   console.log(errors);
   // const navigate = useNavigate();
+
+  useEffect(() => {
+
+  })
 
   function onSubmit(formdata) { 
     console.log("inside onSubmit")
@@ -54,6 +58,8 @@ export default function CorporateForm() {
 
       <label style={{ marginBottom: 10 }}>If you would like to publish your membership status, please provide a link to your corporate logo:</label>
       <input type="text" placeholder="Enter a url, http://" {...register("url", {})} />
+
+      <p>{JSON.stringify(data)}</p>
 
       <input type="submit" />
     </form>
