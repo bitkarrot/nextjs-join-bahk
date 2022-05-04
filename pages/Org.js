@@ -4,20 +4,12 @@ import {useState} from 'react';
 import { useForm } from 'react-hook-form';
 import Header from "./Header";
 import SiteNav from "./Nav";
-
-//import { useNavigate } from 'react-router-dom';
-//import sendEmail from "./sendgrid";
-//import error from "./error";
+import error from "./error";
 
 export default function CorporateForm() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [data, setData] = useState("");
   console.log(errors);
-  // const navigate = useNavigate();
-
-  useEffect(() => {
-
-  })
 
   function onSubmit(formdata) { 
     console.log("inside onSubmit")
@@ -28,12 +20,11 @@ export default function CorporateForm() {
     console.log("original", formdata);
     console.log("set data", data);
 
-    //sendEmail("corporate", data);
 
     // push data to sendmail, if success then forward to details
     // if fail then send to error page. 
     
-   //('/Details', { state: newdata });
+    // ('/Details', { state: newdata });
     
     //    navigate('/error');
     // alert(JSON.stringify(data))
