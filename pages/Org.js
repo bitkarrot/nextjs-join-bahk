@@ -1,35 +1,48 @@
-import React, { useEffect } from 'react';
-import {useState} from 'react';
-
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Header from "./Header";
 import SiteNav from "./Nav";
-import error from "./error";
+import { useRouter } from 'next/router';
 
 export default function CorporateForm() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [data, setData] = useState("");
   console.log(errors);
+  const router = useRouter();
 
-  function onSubmit(formdata) { 
+  async function onSubmit(formdata) { 
     console.log("inside onSubmit")
     let newdata = {"member": "corporate", ...formdata}
-
     setData(newdata)
-    console.log("newdata", newdata);
-    console.log("original", formdata);
-    console.log("set data", data);
 
+    console.log("set data", data); // unclear why this isn't updated immediately
 
-    // push data to sendmail, if success then forward to details
-    // if fail then send to error page. 
+    console.log("new data", newdata);
+    console.log("errors", errors);
     
-    // ('/Details', { state: newdata });
-    
-    //    navigate('/error');
-    // alert(JSON.stringify(data))
+    const res = await fetch("/api/sendgrid", {
+      body: JSON.stringify({
+        type: "corporate",
+        message: data,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
 
-  }
+    const { error } = await res.json();
+    if (error) {
+      console.log(error);
+      // alert(JSON.stringify(error));
+      router.push('/error');
+    }  else {
+      // on success:
+      // actually should redirect to Details page, but test this first
+      console.log("success pushing to another page ")
+      router.push({pathname: '/Details', query: newdata});
+    }
+  };
 
   return (<>
     <SiteNav/>

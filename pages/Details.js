@@ -1,34 +1,31 @@
 import React, { useEffect, useState} from "react";
-//import { NavLink } from "react-router-dom";
 import Link from 'next/link';
-
-import {useLocation, useNavigate} from 'react-router-dom';
+import { useRouter } from 'next/router';
 import {corporate_fee, individual_fee} from './Constants';
 
-
 export default function Details() { 
-
-  const location = useLocation();
-  const navigate = useNavigate();
+  const router = useRouter();
   const [memberdata, setMemberdata] = useState("");
-
   const [feerate, setFeerate] = useState("");
   const [fee, setFee] = useState("0");
 
   useEffect(() => { 
-    console.log("location state", location.state);
-    console.log("member type: ", location.state.member);
-    setMemberdata(JSON.stringify(location.state));
+    console.log("router query ", router.query);
+    console.log("member type: ", router.query.member);
+    console.log("router.query string:", JSON.stringify(router.query));
+    setMemberdata(JSON.stringify(router.query));
 
-    // don't show this detail page if no data submitted 
-    // bounce back to home
-    if (location.state === null){ 
-      navigate('/');
+    // don't show this detail page if no data submitted
+    // incase someone tries to get to the details page without submitting form data
+    // bounce back to error page
+   if (JSON.stringify(router.query) === JSON.stringify({})){ 
+      router.push({pathname: '/error'});
     } 
-    if (location.state.member === "corporate") {
+
+    if (router.query.member === "corporate") {
       setFeerate(corporate_fee + " BTC for Corporate Members");
       setFee(corporate_fee);
-    } else if (location.state.member === "individual") { 
+    } else if (router.query.member === "individual") { 
       setFeerate(individual_fee + " BTC for Individual Members");
       setFee(individual_fee);
     }
@@ -41,7 +38,7 @@ export default function Details() {
 
   return (
    <div style={{ marginTop: 30 }}>
-      <Link to="/" className="link">
+      <Link href="/" className="link">
         Go Home
       </Link>
 
