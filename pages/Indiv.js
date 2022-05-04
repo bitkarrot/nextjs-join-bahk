@@ -28,6 +28,7 @@ export default function IndividualForm() {
   }
 
   return (<>
+  <SiteNav/>
    <div style={{ marginTop: 150 }}>
    <form onSubmit={handleSubmit(onSubmit)}>
      <Header kind="individual"/>

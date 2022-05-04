@@ -1,42 +1,44 @@
 import React from 'react';
-import { Container, Row, Col} from 'react-bootstrap';
-import SiteNav from "./Nav";
 import Image from 'next/image';
+import {corporate_fee, individual_fee} from './Constants';
 
 
-export default function Home() {
+export default function Header(props) { 
+    console.log(props)
+    let title = "Corporate Membership Application"
+    let content = "The corporate membership fee for 2021 is set at " + corporate_fee + " BTC"
+    
+    if (props.kind === 'individual') {
+        title = "Individual Membership Application"
+        content = "The individual membership fee for 2021 is set at " + individual_fee + " BTC"
+    }
+    
     const redstyle = {
         color: '#E60600'
-      }
+    }
     
     return (
-        <>
-        <SiteNav/>
-            <div style={{ marginTop: 150 }}>
-            <Container fluid>
-            <Row>
-                <Col sm={8}>
-                <h1>Be a Member</h1>
-                            <p>
-                                As a member-driven organization, we rely on your help and input to progress
-                                the ideas of Bitcoin. Join the
-                                <b style={redstyle}> Bitcoin Association of Hong Kong </b> today.
-                            </p>
-                </Col>
-                <Col sm={4}>
-                <Image
+        <div style={{ marginBottom: 30 }}>
+            <center>
+            <div style={{ marginBottom: 30 }}>
+            <Image
                     src="/images/bahk_logo.svg" // Route of the image file
                     height={144} // Desired size with correct aspect ratio
                     width={144} // Desired size with correct aspect ratio
                     alt="Bitcoin HK Logo"
-                />                           
-                </Col>
-            </Row>
-            </Container>
+            />          
             </div>
-        </>
-
+            
+            <h2 style={redstyle}>
+            {title}
+            </h2>
+        </center>
+        <p style={{ fontSize: 14, lineHeight: 1.3, marginBottom: 0}} align="left" >
+            To sign up, simply fill out the application form below. <b>{content}</b> and will be revised once per year. We will send you an email with a confirmation usually within 48h. 
+            If you have questions, please drop us an email: info[at]bitcoin.org.hk 
+        </p>
+        </div>
+    
     );
-  };
- 
-
+};
+    

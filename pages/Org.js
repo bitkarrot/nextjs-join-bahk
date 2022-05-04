@@ -37,6 +37,7 @@ export default function CorporateForm() {
   }
 
   return (<>
+    <SiteNav/>
     <div style={{ marginTop: 150 }}>
     <form onSubmit={handleSubmit(onSubmit)}>
     <Header kind="corporate"/>
