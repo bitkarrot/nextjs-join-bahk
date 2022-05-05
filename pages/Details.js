@@ -13,7 +13,17 @@ export default function Details() {
     console.log("router query ", router.query);
     console.log("member type: ", router.query.member);
     console.log("router.query string:", JSON.stringify(router.query));
-    setMemberdata(JSON.stringify(router.query));
+
+    let obj = router.query;
+    let fcontent = "<ul>";
+    for (var key in obj) {
+      var value  = obj[key];
+      console.log(key, value);
+      fcontent = fcontent + "<li><b>" + key + "</b>: " +   value + "</li> ";
+    }
+    fcontent = fcontent +  "</ul>";
+    console.log(fcontent);
+    setMemberdata(fcontent);
 
     // don't show this detail page if no data submitted
     // incase someone tries to get to the details page without submitting form data
@@ -65,7 +75,8 @@ export default function Details() {
 
         <div>
           <h3> Your submitted info</h3>
-           <p> {memberdata} </p>
+
+           <p> <div dangerouslySetInnerHTML={{ __html:memberdata}}/> </p>
         </div>
   </div>
   );

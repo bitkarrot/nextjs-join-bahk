@@ -1,31 +1,52 @@
-import React from 'react';
-import {useState} from 'react';
-
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Header from "./Header";
 import SiteNav from "./Nav";
-//import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 export default function IndividualForm() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [data, setData] = useState("");
   console.log(errors);
-//  const navigate = useNavigate();
+  const router = useRouter();
 
-  function onSubmit(data) { 
+  async function onSubmit(formdata) { 
     console.log("inside onSubmit")
-    let newdata = {"member": "individual", ...data}
-    console.log("newdata", newdata)
-
+    let newdata = {"member": "individual", ...formdata}
     setData(newdata)
-    console.log("original", data)
 
-    // push data to sendmail, if success then forward to details
-    // if fail then send to error page. 
-//    navigate('/Details', { state: newdata });
-    // alert(JSON.stringify(data))
+    console.log("set data", data);
+     // unclear why this isn't updated immediately
 
-  }
+    console.log("new data", newdata);
+    //console.log("errors", errors);
+    /*
+    const res = await fetch("/api/sendgrid", {
+      body: JSON.stringify({
+        type: "corporate",
+        message: newdata,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+
+    const { error } = await res.json();
+    if (error) {
+      console.log(error);
+      // alert(JSON.stringify(error));
+      router.push('/error');
+    }  else {
+      */
+      // on success:
+      // actually should redirect to Details page, but test this first
+      console.log("success pushing to another page ")
+      router.push({pathname: '/Details', query: newdata});
+   // }
+
+  };
+
 
   return (<>
   <SiteNav/>
