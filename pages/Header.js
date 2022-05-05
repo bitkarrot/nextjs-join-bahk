@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import {corporate_fee, individual_fee} from './Constants';
+import {corporate_fee, individual_fee} from '../lib/Constants';
 
 
 export default function Header(props) { 

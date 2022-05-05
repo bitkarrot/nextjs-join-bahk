@@ -1,7 +1,7 @@
 //import React, { useEffect} from "react";
 import React, {useEffect, useState} from "react";
 import { useRouter } from 'next/router';
-//import {corporate_fee, individual_fee} from './Constants';
+//import {corporate_fee, individual_fee} from '../lib/Constants';
 //import format from "./format";
 import SiteNav from "./Nav";
 
