@@ -2,27 +2,28 @@
 import React, {useEffect, useState} from "react";
 import { useRouter } from 'next/router';
 //import {corporate_fee, individual_fee} from './Constants';
-import format from "./format";
+//import format from "./format";
 import SiteNav from "./Nav";
 
 export default function Details() { 
   const router = useRouter();
-  const [memberdata, setMemberdata] = useState("");
+//  const [memberdata, setMemberdata] = useState("");
   //const [feerate, setFeerate] = useState("");
   //const [fee, setFee] = useState("0");
 
   useEffect(() => { 
-    if(!router.isReady) return;
+    //if (!router.isReady) return;
     // console.log("router query ", router.query);
     // console.log("member type: ", router.query.member);
     // console.log("router.query string:", JSON.stringify(router.query));
 
-    const data = router.query.member;
-    console.log("member: ", data);
-
-    let formatted = format(router.query);
+    if (Object.keys(router.query).length > 0) {
+      const data = router.query.member;
+      console.log("member: ", data);
+    }
+    //let formatted = format(router.query);
     //console.log(formatted);
-    setMemberdata(formatted);
+    //setMemberdata(formatted);
 
     // don't show this detail page if no data submitted
     // incase someone tries to get to the details page without submitting form data
@@ -40,7 +41,7 @@ export default function Details() {
         }
 */
       
-  }, [router.isReady, memberdata]);
+  }, [router.query]);
 
   
   const divStyle = {
@@ -71,7 +72,6 @@ export default function Details() {
 
         <div>
           <h3> Your submitted info</h3>
-          <div dangerouslySetInnerHTML={{ __html:memberdata}}/> 
         </div>
         </>
   );
