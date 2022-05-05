@@ -1,9 +1,13 @@
 import sendgrid from "@sendgrid/mail";
+import format from "../format";
 
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
 async function sendEmail(req, res) {
   // NOTE: Uncomment the below lines to make the code work
+  let content = req.body.message;
+  let memberdata = format(content);
+  //  console.log(memberdata);
 
   try {
     await sendgrid.send({
@@ -25,11 +29,13 @@ async function sendEmail(req, res) {
         <div class="img-container" style="display: flex;justify-content: center;align-items: center;border-radius: 5px;overflow: hidden; font-family: 'helvetica', 'ui-sans';">
               </div>
               <div class="container" style="margin-left: 20px;margin-right: 20px;">
-              <h3>You've got a new member application! NOTE: this message does not confirm
-              they have paid dues. Leo, please check BTCPAY </h3>
+              <h2>You've got a new member application!</h2>
+              <h3> NOTE: this message does not confirm
+              they have paid dues. </h3>
+              <h3>Leo, please check BTCPAY Server for payment </h3>
               <div style="font-size: 16px;">
               <p>Message:</p>
-              <p>${JSON.stringify(req.body.message)}</p>
+              <div> ${memberdata} </div>
               <br>
               </div>
               <img src="https://www.bitcoin.org.hk/images/bahk-logo-big-white.svg" class="logo-image" style="height: 50px;width: 50px;border-radius: 5px;overflow: hidden;">

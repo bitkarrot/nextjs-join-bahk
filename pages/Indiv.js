@@ -20,7 +20,7 @@ export default function IndividualForm() {
 
     console.log("new data", newdata);
     //console.log("errors", errors);
-    /*
+    
     const res = await fetch("/api/sendgrid", {
       body: JSON.stringify({
         type: "corporate",
@@ -38,15 +38,12 @@ export default function IndividualForm() {
       // alert(JSON.stringify(error));
       router.push('/error');
     }  else {
-      */
       // on success:
       // actually should redirect to Details page, but test this first
       console.log("success pushing to another page ")
       router.push({pathname: '/Details', query: newdata});
-   // }
-
+    }
   };
-
 
   return (<>
   <SiteNav/>

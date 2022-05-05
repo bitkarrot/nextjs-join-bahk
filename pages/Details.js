@@ -1,7 +1,8 @@
 import React, { useEffect, useState} from "react";
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {corporate_fee, individual_fee} from './Constants';
+import format from "./format";
+import SiteNav from "./Nav";
 
 export default function Details() { 
   const router = useRouter();
@@ -10,20 +11,13 @@ export default function Details() {
   const [fee, setFee] = useState("0");
 
   useEffect(() => { 
-    console.log("router query ", router.query);
-    console.log("member type: ", router.query.member);
-    console.log("router.query string:", JSON.stringify(router.query));
+    // console.log("router query ", router.query);
+    // console.log("member type: ", router.query.member);
+    // console.log("router.query string:", JSON.stringify(router.query));
 
-    let obj = router.query;
-    let fcontent = "<ul>";
-    for (var key in obj) {
-      var value  = obj[key];
-      console.log(key, value);
-      fcontent = fcontent + "<li><b>" + key + "</b>: " +   value + "</li> ";
-    }
-    fcontent = fcontent +  "</ul>";
-    console.log(fcontent);
-    setMemberdata(fcontent);
+    let formatted = format(router.query);
+    // console.log(formatted);
+    setMemberdata(formatted);
 
     // don't show this detail page if no data submitted
     // incase someone tries to get to the details page without submitting form data
@@ -46,13 +40,9 @@ export default function Details() {
     color: 'orange'
   }
 
-  return (
-   <div style={{ marginTop: 30 }}>
-      <Link href="/" className="link">
-        Go Home
-      </Link>
-
-      <div style={{ marginTop: 50 }}>
+  return (<>
+    <SiteNav/>
+      <div style={{ marginTop: 150 }}>
         <h1>Ok, now that we have your information....</h1>
       </div>
 
@@ -78,6 +68,6 @@ export default function Details() {
 
            <p> <div dangerouslySetInnerHTML={{ __html:memberdata}}/> </p>
         </div>
-  </div>
+        </>
   );
 }
