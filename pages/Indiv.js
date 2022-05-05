@@ -67,7 +67,7 @@ export default function IndividualForm() {
         <option value="No">No</option>
       </select>
       
-      <input type="submit" />
+      <input type="submit" value="Submit"/>
     </form>
     </div>
     </>

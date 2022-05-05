@@ -64,9 +64,7 @@ export default function CorporateForm() {
       <label style={{ marginBottom: 10 }}>If you would like to publish your membership status, please provide a link to your corporate logo:</label>
       <input type="text" placeholder="Enter a url, http://" {...register("url", {})} />
 
-      <p>{JSON.stringify(data)}</p>
-
-      <input type="submit" />
+      <input type="submit" value="Submit" />
     </form>
     </div>
     </>
