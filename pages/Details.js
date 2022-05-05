@@ -55,7 +55,7 @@ export default function Details() {
             <input type="hidden" name="storeId" value="5fv2Vt5WEuLYBzkhFiaDN4r6xy6JdNqTbi3m1mG4ngFa" />
             <input type="hidden" name="currency" value="BTC" />
             <input type="hidden" name="price" value={fee} />
-            <input type="image" src="https://btcpay.bitcoin.org.hk/img/paybutton/pay.png" name="submit" style={{width: 209, border:0}}  alt="Pay with BtcPay, Self-Hosted Bitcoin Payment Processor"/>
+            <input type="image" src="/images/pay.png" name="submit" style={{width: 209, border:0}}  alt="Pay with BtcPay"/>
           </form>
         </div>
 
