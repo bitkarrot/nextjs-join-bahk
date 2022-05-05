@@ -1,47 +1,35 @@
-//import React, { useEffect} from "react";
 import React, {useEffect, useState} from "react";
 import { useRouter } from 'next/router';
-//import {corporate_fee, individual_fee} from '../lib/Constants';
-//import format from "./format";
+import {corporate_fee, individual_fee} from '../lib/Constants';
+import format from "./format";
 import SiteNav from "./Nav";
 
 export default function Details() { 
   const router = useRouter();
-//  const [memberdata, setMemberdata] = useState("");
-  //const [feerate, setFeerate] = useState("");
-  //const [fee, setFee] = useState("0");
+  const [memberdata, setMemberdata] = useState("");
+  const [feerate, setFeerate] = useState("");
+  const [fee, setFee] = useState("0");
 
   useEffect(() => { 
     //if (!router.isReady) return;
-    // console.log("router query ", router.query);
-    // console.log("member type: ", router.query.member);
-    // console.log("router.query string:", JSON.stringify(router.query));
 
     if (Object.keys(router.query).length > 0) {
       const data = router.query.member;
       console.log("member: ", data);
-    }
-    //let formatted = format(router.query);
-    //console.log(formatted);
-    //setMemberdata(formatted);
+    
+      let formatted = format(router.query);
+      console.log(formatted);
+      setMemberdata(formatted);
 
-    // don't show this detail page if no data submitted
-    // incase someone tries to get to the details page without submitting form data
-    // bounce back to error page
-//   if (JSON.stringify(router.query) === JSON.stringify({})){ 
-//      router.push({pathname: '/error'});
-//    } 
-
-/*        if (router.query.member === "corporate") {
+      if (router.query.member === "corporate") {
           setFeerate(corporate_fee + " BTC for Corporate Members");
           setFee(corporate_fee);
         } else if (router.query.member === "individual") { 
           setFeerate(individual_fee + " BTC for Individual Members");
           setFee(individual_fee);
         }
-*/
-      
-  }, [router.query]);
+      }      
+  }, [router.query, memberdata, feerate, fee]);
 
   
   const divStyle = {
@@ -61,17 +49,19 @@ export default function Details() {
             Pay membership fee by clicking on the pay button below.
             This self hosted payment provider accepts either lightning or bitcoin. 
           </p>
+          <p> <b style={divStyle}> {feerate}</b> </p>
 
           <form method="POST" action="https://btcpay.bitcoin.org.hk/api/v1/invoices">
             <input type="hidden" name="storeId" value="5fv2Vt5WEuLYBzkhFiaDN4r6xy6JdNqTbi3m1mG4ngFa" />
             <input type="hidden" name="currency" value="BTC" />
-            <input type="hidden" name="price" value="0.013" />
+            <input type="hidden" name="price" value={fee} />
             <input type="image" src="https://btcpay.bitcoin.org.hk/img/paybutton/pay.png" name="submit" style={{width: 209, border:0}}  alt="Pay with BtcPay, Self-Hosted Bitcoin Payment Processor"/>
           </form>
         </div>
 
         <div>
           <h3> Your submitted info</h3>
+          <div dangerouslySetInnerHTML={{ __html:memberdata}}/>
         </div>
         </>
   );
