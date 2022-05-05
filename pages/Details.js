@@ -1,23 +1,27 @@
 //import React, { useEffect} from "react";
 import React, {useEffect, useState} from "react";
 import { useRouter } from 'next/router';
-import {corporate_fee, individual_fee} from './Constants';
+//import {corporate_fee, individual_fee} from './Constants';
 import format from "./format";
 import SiteNav from "./Nav";
 
 export default function Details() { 
   const router = useRouter();
   const [memberdata, setMemberdata] = useState("");
-  const [feerate, setFeerate] = useState("");
-  const [fee, setFee] = useState("0");
+  //const [feerate, setFeerate] = useState("");
+  //const [fee, setFee] = useState("0");
 
   useEffect(() => { 
+    if(!router.isReady) return;
     // console.log("router query ", router.query);
     // console.log("member type: ", router.query.member);
     // console.log("router.query string:", JSON.stringify(router.query));
 
+    const data = router.query.member;
+    console.log("member: ", data);
+
     let formatted = format(router.query);
-    // console.log(formatted);
+    //console.log(formatted);
     setMemberdata(formatted);
 
     // don't show this detail page if no data submitted
@@ -27,15 +31,18 @@ export default function Details() {
 //      router.push({pathname: '/error'});
 //    } 
 
-    if (router.query.member === "corporate") {
-      setFeerate(corporate_fee + " BTC for Corporate Members");
-      setFee(corporate_fee);
-    } else if (router.query.member === "individual") { 
-      setFeerate(individual_fee + " BTC for Individual Members");
-      setFee(individual_fee);
-    }
-  }, [memberdata, feerate, fee])
+/*        if (router.query.member === "corporate") {
+          setFeerate(corporate_fee + " BTC for Corporate Members");
+          setFee(corporate_fee);
+        } else if (router.query.member === "individual") { 
+          setFeerate(individual_fee + " BTC for Individual Members");
+          setFee(individual_fee);
+        }
+*/
+      
+  }, [router.isReady, memberdata]);
 
+  
   const divStyle = {
     height: "100px",
     color: 'orange'
@@ -54,12 +61,10 @@ export default function Details() {
             This self hosted payment provider accepts either lightning or bitcoin. 
           </p>
 
-            <p> <b style={divStyle}> {feerate}</b> </p>
-
           <form method="POST" action="https://btcpay.bitcoin.org.hk/api/v1/invoices">
             <input type="hidden" name="storeId" value="5fv2Vt5WEuLYBzkhFiaDN4r6xy6JdNqTbi3m1mG4ngFa" />
             <input type="hidden" name="currency" value="BTC" />
-            <input type="hidden" name="price" value={fee} />
+            <input type="hidden" name="price" value="0.013" />
             <input type="image" src="https://btcpay.bitcoin.org.hk/img/paybutton/pay.png" name="submit" style={{width: 209, border:0}}  alt="Pay with BtcPay, Self-Hosted Bitcoin Payment Processor"/>
           </form>
         </div>
