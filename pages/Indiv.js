@@ -16,14 +16,13 @@ export default function IndividualForm() {
     setData(newdata)
 
     //console.log("set data", data);
-     // unclear why this isn't updated immediately
-
+    // unclear why this isn't updated immediately
     //console.log("new data", newdata);
     //console.log("errors", errors);
     
     const res = await fetch("/api/sendgrid", {
       body: JSON.stringify({
-        type: "corporate",
+        type: "individual",
         message: newdata,
       }),
       headers: {
