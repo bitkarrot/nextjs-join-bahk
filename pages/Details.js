@@ -1,4 +1,5 @@
-import React, { useEffect, useState} from "react";
+//import React, { useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useRouter } from 'next/router';
 import {corporate_fee, individual_fee} from './Constants';
 import format from "./format";
@@ -22,9 +23,9 @@ export default function Details() {
     // don't show this detail page if no data submitted
     // incase someone tries to get to the details page without submitting form data
     // bounce back to error page
-   if (JSON.stringify(router.query) === JSON.stringify({})){ 
-      router.push({pathname: '/error'});
-    } 
+//   if (JSON.stringify(router.query) === JSON.stringify({})){ 
+//      router.push({pathname: '/error'});
+//    } 
 
     if (router.query.member === "corporate") {
       setFeerate(corporate_fee + " BTC for Corporate Members");
@@ -33,7 +34,7 @@ export default function Details() {
       setFeerate(individual_fee + " BTC for Individual Members");
       setFee(individual_fee);
     }
-  })
+  }, [memberdata, feerate, fee])
 
   const divStyle = {
     height: "100px",
@@ -65,8 +66,7 @@ export default function Details() {
 
         <div>
           <h3> Your submitted info</h3>
-
-           <p> <div dangerouslySetInnerHTML={{ __html:memberdata}}/> </p>
+          <p> <div dangerouslySetInnerHTML={{ __html:memberdata}}/> </p>
         </div>
         </>
   );
