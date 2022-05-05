@@ -11,14 +11,14 @@ export default function IndividualForm() {
   const router = useRouter();
 
   async function onSubmit(formdata) { 
-    console.log("inside onSubmit")
+    //console.log("inside onSubmit")
     let newdata = {"member": "individual", ...formdata}
     setData(newdata)
 
-    console.log("set data", data);
+    //console.log("set data", data);
      // unclear why this isn't updated immediately
 
-    console.log("new data", newdata);
+    //console.log("new data", newdata);
     //console.log("errors", errors);
     
     const res = await fetch("/api/sendgrid", {
@@ -40,7 +40,7 @@ export default function IndividualForm() {
     }  else {
       // on success:
       // actually should redirect to Details page, but test this first
-      console.log("success pushing to another page ")
+      // console.log("success pushing to another page ")
       router.push({pathname: '/Details', query: newdata});
     }
   };

@@ -11,14 +11,14 @@ export default function CorporateForm() {
   const router = useRouter();
 
   async function onSubmit(formdata) { 
-    console.log("inside onSubmit")
+    //console.log("inside onSubmit")
     let newdata = {"member": "corporate", ...formdata}
     setData(newdata)
 
-    console.log("set data", data);
+    //console.log("set data", data);
      // unclear why this isn't updated immediately
 
-    console.log("new data", newdata);
+    //console.log("new data", newdata);
     //console.log("errors", errors);
     
     const res = await fetch("/api/sendgrid", {
