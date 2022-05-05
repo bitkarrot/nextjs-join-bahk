@@ -66,7 +66,7 @@ export default function Details() {
 
         <div>
           <h3> Your submitted info</h3>
-          <p> <div dangerouslySetInnerHTML={{ __html:memberdata}}/> </p>
+          <div dangerouslySetInnerHTML={{ __html:memberdata}}/> 
         </div>
         </>
   );
