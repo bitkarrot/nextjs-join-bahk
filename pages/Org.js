@@ -36,13 +36,13 @@ export default function CorporateForm() {
 
     const { error } = await res.json();
     if (error) {
-      console.log(error);
+      //console.log(error);
       // alert(JSON.stringify(error));
       router.push('/error');
     }  else {
       // on success:
-      // actually should redirect to Details page, but test this first
-      console.log("success pushing to another page ")
+      // redirect to Details page
+      // console.log("success pushing to another page ")
       router.push({pathname: '/Details', query: newdata});
     }
   };

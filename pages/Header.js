@@ -4,7 +4,7 @@ import {corporate_fee, individual_fee, year} from '../lib/Constants';
 
 
 export default function Header(props) { 
-    console.log(props)
+   // console.log(props)
     let title = "Corporate Membership Application"
     let content = "The corporate membership fee for " + year + " is set at " + corporate_fee + " BTC"
     

@@ -4,7 +4,6 @@ import format from "../format";
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
 async function sendEmail(req, res) {
-  // NOTE: Uncomment the below lines to make the code work
   let content = req.body.message;
   let memberdata = format(content);
   //  console.log(memberdata);
