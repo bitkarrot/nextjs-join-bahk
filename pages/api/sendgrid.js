@@ -11,8 +11,8 @@ async function sendEmail(req, res) {
 
   try {
     await sendgrid.send({
-      to: "bitkarrot@bitcoin.org.hk", // Your email where you'll receive emails
-      from: "bitkarrot@bitcoin.org.hk", // your website email address here
+      to: "membership@bitcoin.org.hk", // Your email where you'll receive emails
+      from: "membership@bitcoin.org.hk", // your website email address here
       subject: `[BAHK New Member Application] : ${req.body.type}`,
       html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
       <html lang="en">
