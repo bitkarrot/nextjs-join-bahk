@@ -32,3 +32,6 @@ yarn-error.log*
 .vercel
 .env
 .env.local
+
+# package, only because vercel can't handle it
+package-lock.json
