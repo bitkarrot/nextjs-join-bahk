@@ -7,10 +7,11 @@ import { useRouter } from 'next/router';
 export default function IndividualForm() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [data, setData] = useState("");
-  console.log(errors);
   const router = useRouter();
+  //console.log(errors);
 
   async function onSubmit(formdata) { 
+    alert("Okay you are now submitting your data");
     //console.log("inside onSubmit")
     let newdata = {"member": "individual", ...formdata}
     setData(newdata)
@@ -18,7 +19,6 @@ export default function IndividualForm() {
     //console.log("set data", data);
     // unclear why this isn't updated immediately
     //console.log("new data", newdata);
-    //console.log("errors", errors);
     
     const res = await fetch("/api/sendgrid", {
       body: JSON.stringify({

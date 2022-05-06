@@ -12,6 +12,8 @@ export default function CorporateForm() {
 
   async function onSubmit(formdata) { 
     //console.log("inside onSubmit")
+    alert("Okay you are now submitting your data");
+
     let newdata = {"member": "corporate", ...formdata}
     setData(newdata)
 

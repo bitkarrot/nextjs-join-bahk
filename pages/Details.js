@@ -15,7 +15,7 @@ export default function Details() {
 
     if (Object.keys(router.query).length > 0) {
       const data = router.query.member;
-      console.log("member: ", data);
+      //console.log("member: ", data);
     
       let formatted = format(router.query);
       console.log(formatted);
