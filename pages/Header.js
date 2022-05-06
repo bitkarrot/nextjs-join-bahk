@@ -1,16 +1,16 @@
 import React from 'react';
 import Image from 'next/image';
-import {corporate_fee, individual_fee} from '../lib/Constants';
+import {corporate_fee, individual_fee, year} from '../lib/Constants';
 
 
 export default function Header(props) { 
     console.log(props)
     let title = "Corporate Membership Application"
-    let content = "The corporate membership fee for 2021 is set at " + corporate_fee + " BTC"
+    let content = "The corporate membership fee for " + year + " is set at " + corporate_fee + " BTC"
     
     if (props.kind === 'individual') {
         title = "Individual Membership Application"
-        content = "The individual membership fee for 2021 is set at " + individual_fee + " BTC"
+        content = "The individual membership fee for "  + year  + " is set at " + individual_fee + " BTC"
     }
     
     const redstyle = {

@@ -46,8 +46,9 @@ export default function Details() {
       <div>
           <h3> Pay Member Dues with BTCPay </h3>
           <p> 
-            Pay membership fee by clicking on the pay button below.
-            This self hosted payment provider accepts either lightning or bitcoin. 
+            Pay membership fee by clicking on the BTCPay button below.
+            This self hosted payment provider accepts either lightning or bitcoin.
+            Once you click, do not go back. If any issues, contact info[at]bitcoin.org.hk.
           </p>
           <p> <b style={divStyle}> {feerate}</b> </p>
 
