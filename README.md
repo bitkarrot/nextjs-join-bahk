@@ -1,7 +1,7 @@
 ## How to Edit member Fees and Year
 
 To edit your membership fees, fork this repository, 
-edit the values in the ```pages/Contants.js``` file and make a pull request to the master branch. 
+edit the values in the ```lib/Contants.js``` file and make a pull request to the master branch. 
 
 
 ## Getting Started
