@@ -16,10 +16,6 @@ export default function IndividualForm() {
     let newdata = {"member": "individual", ...formdata}
     setData(newdata)
 
-    //console.log("set data", data);
-    // unclear why this isn't updated immediately
-    //console.log("new data", newdata);
-    
     const res = await fetch("/api/sendgrid", {
       body: JSON.stringify({
         type: "individual",
