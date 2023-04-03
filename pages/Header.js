@@ -20,7 +20,7 @@ export default function Header(props) {
     return (
         <div style={{ marginBottom: 30 }}>
             <center>
-            <div style={{ marginBottom: 30 }}>
+            <div style={{ marginTop: 100 }}>
             <Image
                     src="/images/bahk_logo.svg" // Route of the image file
                     height={144} // Desired size with correct aspect ratio

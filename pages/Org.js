@@ -49,7 +49,7 @@ export default function CorporateForm() {
 
   return (<>
     <SiteNav/>
-    <div style={{ marginTop: 150 }}>
+    <div style={{ margin: 50 }}>
     <form onSubmit={handleSubmit(onSubmit)}>
     <Header kind="corporate"/>
       <input type="text"  placeholder="Your Organization Name" {...register("orgname", {required: true, maxLength: 80})} />

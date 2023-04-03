@@ -42,9 +42,9 @@ export default function IndividualForm() {
 
   return (<>
   <SiteNav/>
-   <div style={{ marginTop: 150 }}>
-   <form onSubmit={handleSubmit(onSubmit)}>
+   <div style={{ margin: 50 }}>
      <Header kind="individual"/>
+     <form onSubmit={handleSubmit(onSubmit)}>
       <input type="text" placeholder="Your Name:" {...register("name", {required: true, maxLength: 80})} />
       <input type="text" placeholder="公司名:" {...register("chinese", {required: false, maxLength: 100})} />
       <input type="text" placeholder="Email" {...register("email", {required: true, pattern: /^\S+@\S+$/i})} />
