@@ -3,19 +3,20 @@ import { useRouter } from 'next/router';
 import {corporate_fee, individual_fee} from '../lib/Constants';
 import format from "./format";
 import SiteNav from "./Nav";
+import LNbitsPayment from './lnbits'
 
-export default function Details() { 
+export default function Details() {
   const router = useRouter();
   const [memberdata, setMemberdata] = useState("");
   const [feerate, setFeerate] = useState("");
   const [fee, setFee] = useState("0");
 
-  useEffect(() => { 
+  useEffect(() => {
     //if (!router.isReady) return;
 
     if (Object.keys(router.query).length > 0) {
       const data = router.query.member;
-    
+
       let formatted = format(router.query);
       // console.log(formatted);
       setMemberdata(formatted);
@@ -23,14 +24,14 @@ export default function Details() {
       if (router.query.member === "corporate") {
           setFeerate(corporate_fee + " BTC for Corporate Members");
           setFee(corporate_fee);
-        } else if (router.query.member === "individual") { 
+        } else if (router.query.member === "individual") {
           setFeerate(individual_fee + " BTC for Individual Members");
           setFee(individual_fee);
         }
-      }      
+      }
   }, [router.query, memberdata, feerate, fee]);
 
-  
+
   const divStyle = {
     height: "100px",
     color: 'orange'
@@ -44,13 +45,15 @@ export default function Details() {
 
       <div>
           <h3> Pay Member Dues with BTCPay </h3>
-          <p> 
+          <p>
             Pay membership fee by clicking on the BTCPay button below.
             This self hosted payment provider accepts either lightning or bitcoin.
             Once you click, do not go back. If any issues, contact info[at]bitcoin.org.hk.
           </p>
           <p> <b style={divStyle}> {feerate}</b> </p>
-
+          {/*start new content*/}
+          <LNbitsPayment/>
+          {/*end new content*/}
           <form method="POST" action="https://btcpay.bitcoin.org.hk/api/v1/invoices">
             <input type="hidden" name="storeId" value="5fv2Vt5WEuLYBzkhFiaDN4r6xy6JdNqTbi3m1mG4ngFa" />
             <input type="hidden" name="currency" value="BTC" />
