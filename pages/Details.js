@@ -48,11 +48,12 @@ export default function Details() {
           <p>
             Pay membership fee by clicking on the BTCPay button below.
             This self hosted payment provider accepts either lightning or bitcoin.
-            Once you click, do not go back. If any issues, contact info[at]bitcoin.org.hk.
+            Once you click, do not go back. If any issues, please contact&nbsp;
+            <a href="mailto:info@bitcoin.org.hk" target="_blank" rel="noopener noreferrer">info@bitcoin.org.hk</a>.
           </p>
           <p> <b style={divStyle}> {feerate}</b> </p>
           {/*start new content*/}
-          <LNbitsPayment/>
+          {/* <LNbitsPayment fee={fee}/> */}
           {/*end new content*/}
           <form method="POST" action="https://btcpay.bitcoin.org.hk/api/v1/invoices">
             <input type="hidden" name="storeId" value="5fv2Vt5WEuLYBzkhFiaDN4r6xy6JdNqTbi3m1mG4ngFa" />
