@@ -41,7 +41,7 @@ export default async function handler(req, res) {
           completelinktext: "",
           custom_css: "",
           time: 6000,
-          amount: 1, //amount * 100_000_000, //sats conversion
+          amount: amount * 100_000_000, //sats conversion
           extra:
             '{"mempool_endpoint": "https://mempool.space", "network": "Mainnet"}',
         }),
