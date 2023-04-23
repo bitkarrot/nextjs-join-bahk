@@ -15,10 +15,10 @@ function runMiddleware(req, res, fn) {
   });
 }
 
-const ADMIN_API_KEY = process.env.ADMIN_API_KEY;
-const INVOICE_API_KEY = process.env.INVOICE_API_KEY;
+const ADMIN_API_KEY = process.env.ADMIN_API_KEY
+const INVOICE_API_KEY = process.env.INVOICE_API_KEY
 const ON_CHAIN_WALLET = process.env.ON_CHAIN_WALLET;
-const LNBITS_WALLET = process.env.LNBITS_WALLET;
+const LNBITS_WALLET = process.env.LNBITS_WALLET
 
 export default async function handler(req, res) {
   await runMiddleware(req, res, cors);
@@ -41,13 +41,14 @@ export default async function handler(req, res) {
           completelinktext: "",
           custom_css: "",
           time: 6000,
-          amount: amount * 100_000_000, //sats conversion
+          amount: amount * 100000000, //sats conversion
           extra:
             '{"mempool_endpoint": "https://mempool.space", "network": "Mainnet"}',
         }),
       }
     );
     const data = await response.json();
+
     res.status(200).json(data);
   } else if (req.method === "GET") {
     const { paymentID } = req.query;

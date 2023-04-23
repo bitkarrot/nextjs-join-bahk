@@ -12,7 +12,7 @@ const LNbitsPayment = ({ fee }) => {
 
   useEffect(() => {
     createInvoice();
-  }, []);
+  }, [fee]);
 
   useEffect(() => {
     if (modalVisible) {
@@ -29,12 +29,11 @@ const LNbitsPayment = ({ fee }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        amount: fee,
+        amount: parseFloat(fee),
         memo: "Bitcoin HK Membership Dues",
       }),
     });
     const data = await response.json();
-    console.log(data.id);
     if (!iframeSrc)
       setIframeSrc(`https://legend.lnbits.com/satspay/${data.id}`);
     setPaymentID(data.id);
