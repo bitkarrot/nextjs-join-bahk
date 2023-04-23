@@ -15,8 +15,10 @@ function runMiddleware(req, res, fn) {
   });
 }
 
-const ADMIN_API_KEY = "d2d66b047e1e465e920e6094b13b064d";
-const INVOICE_API_KEY = "6e6ce46efcbb446eaaabcfe55a345d82";
+const ADMIN_API_KEY = process.env.ADMIN_API_KEY;
+const INVOICE_API_KEY = process.env.INVOICE_API_KEY;
+const ON_CHAIN_WALLET = process.env.ON_CHAIN_WALLET;
+const LNBITS_WALLET = process.env.LNBITS_WALLET;
 
 export default async function handler(req, res) {
   await runMiddleware(req, res, cors);
@@ -31,8 +33,8 @@ export default async function handler(req, res) {
           "X-Api-Key": INVOICE_API_KEY,
         },
         body: JSON.stringify({
-          onchainwallet: "",
-          lnbitswallet: "6649dc21b2f84518b82c83155efa2fe8",
+          onchainwallet: ON_CHAIN_WALLET,
+          lnbitswallet: LNBITS_WALLET,
           description: memo,
           webhook: "",
           completelink: "",
