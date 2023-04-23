@@ -1,41 +1,116 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import lnBitLogo from "../public/images/lnbit-logo.webp";
+import Image from "next/image";
+import styles from "../styles/Lnbits.module.css";
 
-const LNbitsPayment = ({fee}) => {
-  const [invoice, setInvoice] = useState(null);
-  const [paymentStatus, setPaymentStatus] = useState('');
+const LNbitsPayment = ({ fee }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [iframeSrc, setIframeSrc] = useState("");
+  const [paymentID, setPaymentID] = useState("");
+  const [paid, setPaid] = useState(false);
+  const [animationState, setAnimationState] = useState("");
+
+  useEffect(() => {
+    createInvoice();
+  }, []);
+
+  useEffect(() => {
+    if (modalVisible) {
+      document.body.classList.add(styles.noScroll);
+    } else {
+      document.body.classList.remove(styles.noScroll);
+    }
+  }, [modalVisible]);
 
   const createInvoice = async () => {
-    const response = await fetch('/api/lnbits', {
-      method: 'POST',
+    const response = await fetch("/api/lnbits", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        amount: fee * 1000000, // Convert BTC to sats
-        memo: 'Payment for your service',
+        amount: fee,
+        memo: "Bitcoin HK Membership Dues",
       }),
     });
     const data = await response.json();
-    setInvoice(data);
+    console.log(data.id);
+    if (!iframeSrc)
+      setIframeSrc(`https://legend.lnbits.com/satspay/${data.id}`);
+    setPaymentID(data.id);
   };
 
-  const checkPaymentStatus = async () => {
-    if (!invoice) return;
+  const openModal = () => {
+    setAnimationState("in");
+    setModalVisible(true);
+  };
 
-    const response = await fetch(`/api/lnbits?invoiceId=${invoice.id}`);
-    const data = await response.json();
-    setPaymentStatus(data.paid ? 'Paid' : 'Unpaid');
+  const closeModal = async () => {
+    setAnimationState("out");
+    setTimeout(async () => {
+      setModalVisible(false);
+      const response = await fetch(`/api/lnbits/?paymentID=${paymentID}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data.paid);
+      if (data.paid) setPaid(true);
+    }, 300);
+  };
+
+  const handleModalClick = (e) => {
+    if (e.target === e.currentTarget) {
+      closeModal();
+    }
   };
 
   return (
     <div>
-      <button onClick={createInvoice}>Pay with LNbits</button>
-      {/* Optional payment status check */}
-      {invoice && (
-        <div>
-          <p>Invoice: {invoice.payment_request}</p>
-          <p>Status: {paymentStatus}</p>
-          <button onClick={checkPaymentStatus}>Check Payment Status</button>
+      {!paid ? (
+        <button className={styles.payButton} onClick={openModal}>
+          <div className={styles.buttonContent}>
+            Pay with LNbits{" "}
+            <div className={styles.logoContainer}>
+              <Image src={lnBitLogo} alt="lnbits logo" width={25} height={25} />
+            </div>
+          </div>
+        </button>
+      ) : (
+        <span className={styles.paymentConfirmed}>
+          Thanks for paying your dues! Check your email for upcoming events and
+          ways to contribute!
+        </span>
+      )}
+      {modalVisible && (
+        <div
+          className={`${styles.modal} ${
+            animationState === "in" ? styles.fadeIn : styles.fadeOut
+          }`}
+          onClick={handleModalClick}
+        >
+          <div
+            className={`${styles.modalContent} ${
+              animationState === "in" ? styles.slideIn : styles.slideOut
+            }`}
+          >
+            <iframe
+              className={styles.paymentPopup}
+              src={iframeSrc}
+              title="Payment"
+              allow="clipboard-read; clipboard-write"
+            />
+            <button
+              className={`${styles.closeButton} ${
+                animationState === "in" ? styles.fadeIn : styles.fadeOut
+              }`}
+              onClick={closeModal}
+            >
+              &times;
+            </button>
+          </div>
         </div>
       )}
     </div>
