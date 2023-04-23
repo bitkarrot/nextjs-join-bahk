@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { corporate_fee, individual_fee } from "../lib/Constants";
 import format from "./format";
 import SiteNav from "./Nav";
-import LNbitsPayment from "./Lnbits";
+import LNbitsPayment from "./lnbits";
 
 export default function Details() {
   const router = useRouter();
