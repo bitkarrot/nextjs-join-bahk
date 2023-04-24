@@ -28,10 +28,10 @@ export default function IndividualForm() {
     });
 
     const { error } = await res.json();
-    if (!error) {
+    if (error) {
       console.log(error);
       // alert(JSON.stringify(error));
-      //router.push('/error');
+      router.push('/error');
     }  else {
       // on success:
       // actually should redirect to Details page, but test this first

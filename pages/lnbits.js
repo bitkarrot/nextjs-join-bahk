@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import lnBitLogo from "../public/images/lnbit-logo.webp";
 import Image from "next/image";
 import styles from "../styles/Lnbits.module.css";
@@ -9,6 +9,10 @@ const LNbitsPayment = ({ fee }) => {
   const [paymentID, setPaymentID] = useState("");
   const [paid, setPaid] = useState(false);
   const [animationState, setAnimationState] = useState("");
+
+  const handleIframeLoad = useCallback((event) => {
+    event.target.style.opacity = '1';
+  }, []);
 
   useEffect(() => {
     createInvoice();
@@ -34,9 +38,11 @@ const LNbitsPayment = ({ fee }) => {
       }),
     });
     const data = await response.json();
-    if (!iframeSrc)
-      setIframeSrc(`https://legend.lnbits.com/satspay/${data.id}`);
-    setPaymentID(data.id);
+    if (!iframeSrc) {
+      console.log('this should only hit once ', iframeSrc)
+      setIframeSrc(`${data.completelink}${data.id}`);
+      setPaymentID(data.id);
+    }
   };
 
   const openModal = () => {
@@ -55,9 +61,8 @@ const LNbitsPayment = ({ fee }) => {
         },
       });
       const data = await response.json();
-      console.log(data.paid);
       if (data.paid) setPaid(true);
-    }, 300);
+    }, 1000);
   };
 
   const handleModalClick = (e) => {
@@ -100,6 +105,7 @@ const LNbitsPayment = ({ fee }) => {
               src={iframeSrc}
               title="Payment"
               allow="clipboard-read; clipboard-write"
+              onLoad={handleIframeLoad}
             />
             <button
               className={`${styles.closeButton} ${

@@ -18,14 +18,16 @@ function runMiddleware(req, res, fn) {
 const ADMIN_API_KEY = process.env.ADMIN_API_KEY
 const INVOICE_API_KEY = process.env.INVOICE_API_KEY
 const ON_CHAIN_WALLET = process.env.ON_CHAIN_WALLET;
-const LNBITS_WALLET = process.env.LNBITS_WALLET
+const LNBITS_WALLET = process.env.LNBITS_WALLET;
+const LNBITS_URL_SERVER = process.env.LNBITS_URL_SERVER;
+const LNBITS_URL_CLIENT = process.env.LNBITS_URL_CLIENT;
 
 export default async function handler(req, res) {
   await runMiddleware(req, res, cors);
   if (req.method === "POST") {
     const { amount, memo } = req.body;
     const response = await fetch(
-      `https://legend.lnbits.com/satspay/api/v1/charge?api-key=${ADMIN_API_KEY}`,
+      `${LNBITS_URL_SERVER}?api-key=${ADMIN_API_KEY}`,
       {
         method: "POST",
         headers: {
@@ -37,10 +39,10 @@ export default async function handler(req, res) {
           lnbitswallet: LNBITS_WALLET,
           description: memo,
           webhook: "",
-          completelink: "",
+          completelink: LNBITS_URL_CLIENT,
           completelinktext: "",
           custom_css: "",
-          time: 6000,
+          time: 6000, // use payment_countdown in lib/constants.js
           amount: amount * 100000000, //sats conversion
           extra:
             '{"mempool_endpoint": "https://mempool.space", "network": "Mainnet"}',
@@ -53,7 +55,7 @@ export default async function handler(req, res) {
   } else if (req.method === "GET") {
     const { paymentID } = req.query;
     const response = await fetch(
-      `https://legend.lnbits.com/satspay/api/v1/charge/${paymentID}/?api-key=${ADMIN_API_KEY}`,
+      `${LNBITS_URL_SERVER}/${paymentID}/?api-key=${ADMIN_API_KEY}`,
       {
         method: "GET",
         headers: {

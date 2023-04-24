@@ -62,15 +62,7 @@ export default function Details() {
           {" "}
           <b style={divStyle}> {feerate}</b>{" "}
         </p>
-        {/*start new content*/}
         <LNbitsPayment fee={fee} />
-        {/*end new content*/}
-        {/* <form method="POST" action="https://btcpay.bitcoin.org.hk/api/v1/invoices">
-            <input type="hidden" name="storeId" value="5fv2Vt5WEuLYBzkhFiaDN4r6xy6JdNqTbi3m1mG4ngFa" />
-            <input type="hidden" name="currency" value="BTC" />
-            <input type="hidden" name="price" value={fee} />
-            <input type="image" src="/images/pay.png" name="submit" style={{width: 209, border:0}}  alt="Pay with BtcPay"/>
-          </form> */}
       </div>
 
       <div>
