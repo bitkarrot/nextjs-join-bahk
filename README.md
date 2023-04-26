@@ -1,7 +1,32 @@
 ## How to Edit member Fees and Year
 
-To edit your membership fees, fork this repository, 
-edit the values in the ```lib/Contants.js``` file and make a pull request to the master branch. 
+To edit your membership fees, year, payment message, and payment timer:
+
+1. fork this repository,
+2. Create a new branch, edit the values in the ```lib/Contants.js``` file and make a pull request to the master branch.
+
+## Requirements
+
+See `.env.example` for the specific API keys needed.
+1. LNBits Wallet information with satspay server integration.
+```javascript
+ADMIN_API_KEY = "";
+INVOICE_API_KEY = "";
+LNBITS_WALLET = "";
+```
+2. Sendgrid API key
+```javascript
+SENDGRID_API_KEY = ""
+```
+3. Base URL for your satspay server API
+```javascript
+LNBITS_BASE_URL = "https://legend.lnbits.com/"
+```
+
+4. Optional On-Chain Wallet
+```javascript
+ON_CHAIN_WALLET = "";
+```
 
 
 ## Getting Started
