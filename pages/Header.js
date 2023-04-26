@@ -35,8 +35,7 @@ export default function Header(props) {
         </center>
         <p style={{ fontSize: 14, lineHeight: 1.3, marginBottom: 0}}>
             To sign up, simply fill out the application form below. <b>{content}</b> and will be revised once per year. We will send you an email with a confirmation usually within 48h.
-            If you have questions, please drop us an email at&nbsp;
-            <a href="mailto:info@bitcoin.org.hk" target="_blank" rel="noopener noreferrer">info@bitcoin.org.hk</a>
+            If you have questions, please drop us an email at info[at]bitcoin.org.hk
         </p>
         </div>
 
