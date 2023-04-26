@@ -3,7 +3,7 @@ import lnBitLogo from "../public/images/lnbit-logo.webp";
 import Image from "next/image";
 import styles from "../styles/Lnbits.module.css";
 
-const LNbitsPayment = ({ fee }) => {
+const LNbitsPayment = ({ fee, memberdata }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [iframeSrc, setIframeSrc] = useState("");
   const [paymentID, setPaymentID] = useState("");
@@ -13,6 +13,13 @@ const LNbitsPayment = ({ fee }) => {
   const handleIframeLoad = useCallback((event) => {
     event.target.style.opacity = '1';
   }, []);
+
+  const userNameParser = () => {
+    const regex = /<span class="Format_key__zdZH3">name<\/span>: <span class="Format_value__UtwH3">(.*?)<\/span>/;
+    const match = memberdata.match(regex);
+    const username = match ? match[1] : 'Not found';
+    return username;
+  }
 
   useEffect(() => {
     createInvoice();
@@ -26,6 +33,8 @@ const LNbitsPayment = ({ fee }) => {
     }
   }, [modalVisible]);
 
+
+
   const createInvoice = async () => {
     const response = await fetch("/api/lnbits", {
       method: "POST",
@@ -34,7 +43,7 @@ const LNbitsPayment = ({ fee }) => {
       },
       body: JSON.stringify({
         amount: parseFloat(fee),
-        memo: "Bitcoin HK Membership Dues",
+        memo: `Bitcoin HK Membership Dues for ${userNameParser()}`,
       }),
     });
     const data = await response.json();

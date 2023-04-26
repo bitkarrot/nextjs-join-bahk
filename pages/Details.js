@@ -48,21 +48,13 @@ export default function Details() {
         <p>
           Pay membership fee by clicking on the LNbits button below. This self
           hosted payment provider accepts either lightning or bitcoin. Once you
-          click, do not go back. If any issues, please contact&nbsp;
-          <a
-            href="mailto:info@bitcoin.org.hk"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            info@bitcoin.org.hk
-          </a>
-          .
+          click, do not go back. If any issues, please contact info[at]bitcoin.org.hk
         </p>
         <p>
           {" "}
           <b style={divStyle}> {feerate}</b>{" "}
         </p>
-        <LNbitsPayment fee={fee} />
+        <LNbitsPayment fee={fee} memberdata={memberdata}/>
       </div>
 
       <div>
