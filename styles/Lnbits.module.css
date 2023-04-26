@@ -36,19 +36,19 @@
 }
 
 .modal.fadeIn {
-  animation: fadeIn 0.5s forwards;
+  animation: fadeIn 1s forwards;
 }
 
 .modal.fadeOut {
-  animation: fadeOut 0.5s forwards;
+  animation: fadeOut 1s forwards;
 }
 
 .modalContent.slideIn {
-  animation: slideIn 0.5s forwards;
+  animation: slideIn 1s forwards;
 }
 
 .modalContent.slideOut {
-  animation: slideOut 0.5s forwards;
+  animation: slideOut 1s forwards;
 }
 
 .closeButton.fadeIn {
@@ -123,7 +123,9 @@
   width: 100%;
   height: 750px;
   border: none;
-  flex-grow: 1
+  flex-grow: 1;
+  opacity: 0;
+  transition: opacity 1s;
 }
 
 .closeButton {
