@@ -19,8 +19,6 @@ const ADMIN_API_KEY = process.env.ADMIN_API_KEY
 const INVOICE_API_KEY = process.env.INVOICE_API_KEY
 const ON_CHAIN_WALLET = process.env.ON_CHAIN_WALLET;
 const LNBITS_WALLET = process.env.LNBITS_WALLET;
-// const LNBITS_URL_SERVER = process.env.LNBITS_URL_SERVER;
-// const LNBITS_URL_CLIENT = process.env.LNBITS_URL_CLIENT;
 const LNBITS_BASE_URL = process.env.LNBITS_BASE_URL;
 
 export default async function handler(req, res) {
