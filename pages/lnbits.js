@@ -47,7 +47,6 @@ const LNbitsPayment = ({ fee, memberdata }) => {
       }),
     });
     const data = await response.json();
-    console.log("Client-side API Response Data:", data);
     if (!iframeSrc) {
       setIframeSrc(`${data.completelink}${data.id}`);
       setPaymentID(data.id);

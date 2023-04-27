@@ -21,14 +21,6 @@ const ON_CHAIN_WALLET = process.env.ON_CHAIN_WALLET;
 const LNBITS_WALLET = process.env.LNBITS_WALLET;
 const LNBITS_BASE_URL = process.env.LNBITS_BASE_URL;
 
-console.log("Environment Variables:", {
-  ADMIN_API_KEY,
-  INVOICE_API_KEY,
-  ON_CHAIN_WALLET,
-  LNBITS_WALLET,
-  LNBITS_BASE_URL,
-});
-
 export default async function handler(req, res) {
   await runMiddleware(req, res, cors);
   if (req.method === "POST") {
