@@ -15,11 +15,11 @@ function runMiddleware(req, res, fn) {
   });
 }
 
-const ADMIN_API_KEY = process.env.NEXT_PUBLIC_ADMIN_API_KEY
-const INVOICE_API_KEY = process.env.NEXT_PUBLIC_INVOICE_API_KEY
-const ON_CHAIN_WALLET = process.env.NEXT_PUBLIC_ON_CHAIN_WALLET;
-const LNBITS_WALLET = process.env.NEXT_PUBLIC_LNBITS_WALLET;
-const LNBITS_BASE_URL = process.env.NEXT_PUBLIC_LNBITS_BASE_URL;
+const ADMIN_API_KEY = process.env.ADMIN_API_KEY
+const INVOICE_API_KEY = process.env.INVOICE_API_KEY
+const ON_CHAIN_WALLET = process.env.ON_CHAIN_WALLET;
+const LNBITS_WALLET = process.env.LNBITS_WALLET;
+const LNBITS_BASE_URL = process.env.LNBITS_BASE_URL;
 
 export default async function handler(req, res) {
   await runMiddleware(req, res, cors);
