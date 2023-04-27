@@ -3,7 +3,7 @@ import lnBitLogo from "../public/images/lnbit-logo.webp";
 import Image from "next/image";
 import styles from "../styles/Lnbits.module.css";
 
-const LNbitsPayment = ({ fee, memberdata }) => {
+const LNbitsPayment = ({ fee, memberdata, userData }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [iframeSrc, setIframeSrc] = useState("");
   const [paymentID, setPaymentID] = useState("");
@@ -15,9 +15,7 @@ const LNbitsPayment = ({ fee, memberdata }) => {
   }, []);
 
   const userNameParser = () => {
-    const regex = /<span class="Format_key__zdZH3">name<\/span>: <span class="Format_value__UtwH3">(.*?)<\/span>/;
-    const match = memberdata.match(regex);
-    const username = match ? match[1] : 'Not found';
+    const username = userData.name || 'Not found';
     return username;
   }
 
