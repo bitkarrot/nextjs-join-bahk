@@ -36,7 +36,7 @@ const LNbitsPayment = ({ fee, memberdata }) => {
 
 
   const createInvoice = async () => {
-    const response = await fetch("/api/lnbits", {
+    const response = await fetch("api/lnbits", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const LNbitsPayment = ({ fee, memberdata }) => {
       }),
     });
     const data = await response.json();
-    //console.log("Client-side API Response Data:", data);
+    console.log("Client-side API Response Data:", data);
     if (!iframeSrc) {
       setIframeSrc(`${data.completelink}${data.id}`);
       setPaymentID(data.id);
