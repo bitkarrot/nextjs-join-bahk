@@ -36,7 +36,7 @@ const LNbitsPayment = ({ fee, memberdata }) => {
 
 
   const createInvoice = async () => {
-    const response = await fetch("/api/lnbits", {
+    const response = await fetch("api/lnbits", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
