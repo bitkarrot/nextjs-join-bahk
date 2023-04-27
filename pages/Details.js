@@ -10,16 +10,17 @@ export default function Details() {
   const [memberdata, setMemberdata] = useState("");
   const [feerate, setFeerate] = useState("");
   const [fee, setFee] = useState("0");
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    //if (!router.isReady) return;
-
     if (Object.keys(router.query).length > 0) {
       const data = router.query.member;
 
       let formatted = format(router.query);
-      // console.log(formatted);
       setMemberdata(formatted);
+
+      // Store user data in a separate state variable
+      setUserData(router.query);
 
       if (router.query.member === "corporate") {
         setFeerate(corporate_fee + " BTC for Corporate Members");
@@ -54,7 +55,7 @@ export default function Details() {
           {" "}
           <b style={divStyle}> {feerate}</b>{" "}
         </p>
-        <LNbitsPayment fee={fee} memberdata={memberdata}/>
+        <LNbitsPayment fee={fee} userData={userData}/>
       </div>
 
       <div>
