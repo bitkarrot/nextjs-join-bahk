@@ -36,7 +36,7 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           onchainwallet: ON_CHAIN_WALLET,
           lnbitswallet: LNBITS_WALLET,
-          memo: memo,
+          description: memo,
           webhook: "",
           completelink: `${LNBITS_BASE_URL}/satspay/`,
           completelinktext: "",
