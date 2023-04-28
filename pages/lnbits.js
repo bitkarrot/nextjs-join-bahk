@@ -21,8 +21,10 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
   }
 
   useEffect(() => {
-    createInvoice();
-  }, [fee]);
+    if (userData) {
+      createInvoice();
+    }
+  }, [fee, userData]);
 
   useEffect(() => {
     if (modalVisible) {
