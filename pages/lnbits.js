@@ -15,7 +15,8 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
   }, []);
 
   const userNameParser = () => {
-    const username = userData.name || 'Not found';
+    console.log(userData)
+    const username = userData.name || userData.contact || 'Not found';
     return username;
   }
 
