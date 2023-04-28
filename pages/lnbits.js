@@ -45,7 +45,7 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
       }),
     });
     const data = await response.json();
-    if (!iframeSrc) {
+    if (!iframeSrc && userData) {
       setIframeSrc(`${data.completelink}${data.id}`);
       setPaymentID(data.id);
     }
