@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import lnBitLogo from "../public/images/lnbit-logo.webp";
 import Image from "next/image";
 import styles from "../styles/Lnbits.module.css";
@@ -9,20 +9,19 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
   const [paymentID, setPaymentID] = useState("");
   const [paid, setPaid] = useState(false);
   const [animationState, setAnimationState] = useState("");
-  const invoiceCreated = useRef(false);
+  const [isInvoiceCreated, setIsInvoiceCreated] = useState(false);
 
   const handleIframeLoad = useCallback((event) => {
     event.target.style.opacity = '1';
   }, []);
 
-  const userNameParser = () => {
+  const userNameParser = (userData) => {
     console.log(userData)
     const username = userData.name || userData.contact || 'Not found';
     return username;
   }
 
-  const createInvoice = async (userData) => {
-    const username = userNameParser(userData);
+  const createInvoice = async (username) => {
     const response = await fetch("api/lnbits", {
       method: "POST",
       headers: {
@@ -41,11 +40,12 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
   };
 
   useEffect(() => {
-    if (fee && userData && !invoiceCreated.current) {
-      createInvoice(userData);
-      invoiceCreated.current = true;
+    if (fee && userData.name && !isInvoiceCreated) {
+      const username = userNameParser(userData);
+      createInvoice(username);
+      setIsInvoiceCreated(true);
     }
-  }, [fee, userData]);
+  }, [fee, userData, isInvoiceCreated]);
 
   useEffect(() => {
     if (modalVisible) {
