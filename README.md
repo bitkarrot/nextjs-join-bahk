@@ -9,22 +9,22 @@ To edit your membership fees, year, payment message, and payment timer:
 
 See `.env.example` for the specific API keys needed.
 1. LNBits Wallet information with satspay server integration.
-```javascript
+```sh
 ADMIN_API_KEY = "";
 INVOICE_API_KEY = "";
 LNBITS_WALLET = "";
 ```
 2. Sendgrid API key
-```javascript
+```sh
 SENDGRID_API_KEY = ""
 ```
 3. Base URL for your satspay server API
-```javascript
-LNBITS_BASE_URL = "https://legend.lnbits.com/"
+```sh
+LNBITS_BASE_URL = "https://legend.lnbits.com"
 ```
 
 4. Optional On-Chain Wallet
-```javascript
+```sh
 ON_CHAIN_WALLET = "";
 ```
 
