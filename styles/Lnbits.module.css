@@ -1,0 +1,168 @@
+/* animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+.modal.fadeIn {
+  animation: fadeIn 1s forwards;
+}
+
+.modal.fadeOut {
+  animation: fadeOut 1s forwards;
+}
+
+.modalContent.slideIn {
+  animation: slideIn 1s forwards;
+}
+
+.modalContent.slideOut {
+  animation: slideOut 1s forwards;
+}
+
+.closeButton.fadeIn {
+  animation: fadeIn 20s forwards;
+}
+
+.closeButton.fadeOut {
+  animation: fadeOut 0.5s forwards;
+}
+
+/* end animations */
+
+.payButton {
+  background-color: #efefef;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.payButton:hover {
+  background-color: #683ab7;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000000;
+  align-items: center;
+}
+
+.modalContent {
+  border-radius: 4px;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+  padding: 0;
+  max-height: 90%;
+  display: flex;
+  flex-direction: column;
+  background: #302c3c
+}
+
+.paymentPopup {
+  width: 100%;
+  height: 750px;
+  border: none;
+  flex-grow: 1;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.closeButton {
+  position: absolute;
+  top: -10px;
+  right: -7px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .closeButton {
+    right: -5px;
+    top: -10px;
+  }
+}
+
+.buttonContent {
+  color: #683ab7;
+  transition: color 0.3s;
+}
+
+.payButton:hover .buttonContent {
+  color: white;
+  transition: color 0.3s;
+}
+
+.paymentConfirmed {
+  font-size: 2rem;
+  text-decoration: underline;
+  color: #F2A900;
+}
+
+.noScroll {
+  overflow: hidden;
+  height: 100%;
+}

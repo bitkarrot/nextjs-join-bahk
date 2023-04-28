@@ -10,7 +10,7 @@ export default function IndividualForm() {
   const router = useRouter();
   //console.log(errors);
 
-  async function onSubmit(formdata) { 
+  async function onSubmit(formdata) {
     alert("Okay you are now submitting your data");
     //console.log("inside onSubmit")
     let newdata = {"member": "individual", ...formdata}
@@ -62,7 +62,7 @@ export default function IndividualForm() {
         <option value="Yes">Yes</option>
         <option value="No">No</option>
       </select>
-      
+
       <input type="submit" value="Submit"/>
     </form>
     </div>
