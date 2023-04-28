@@ -21,7 +21,7 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
   }
 
   useEffect(() => {
-    if (userData) {
+    if (fee && userData) {
       const username = userNameParser();
       createInvoice(username);
     }
