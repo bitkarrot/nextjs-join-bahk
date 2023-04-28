@@ -15,31 +15,17 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
     event.target.style.opacity = '1';
   }, []);
 
-  const userNameParser = () => {
+  const userNameParser = (userData) => {
+    if (!userData) {
+      return 'Not found';
+    }
     console.log(userData)
     const username = userData.name || userData.contact || 'Not found';
     return username;
   }
 
-  useEffect(() => {
-    if (fee && userData && !invoiceCreated.current) {
-      const username = userNameParser();
-      createInvoice(username);
-      invoiceCreated.current = true;
-    }
-  }, [fee, userData]);
-
-  useEffect(() => {
-    if (modalVisible) {
-      document.body.classList.add(styles.noScroll);
-    } else {
-      document.body.classList.remove(styles.noScroll);
-    }
-  }, [modalVisible]);
-
-
-
-  const createInvoice = async (username) => {
+  const createInvoice = async (userData) => {
+    const username = userNameParser(userData);
     const response = await fetch("api/lnbits", {
       method: "POST",
       headers: {
@@ -56,10 +42,21 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
       setPaymentID(data.id);
     }
   };
-  const openModal = () => {
-    setAnimationState("in");
-    setModalVisible(true);
-  };
+
+  useEffect(() => {
+    if (fee && userData && !invoiceCreated.current) {
+      createInvoice(userData);
+      invoiceCreated.current = true;
+    }
+  }, [fee, userData]);
+
+  useEffect(() => {
+    if (modalVisible) {
+      document.body.classList.add(styles.noScroll);
+    } else {
+      document.body.classList.remove(styles.noScroll);
+    }
+  }, [modalVisible]);
 
   const closeModal = async () => {
     setAnimationState("out");
