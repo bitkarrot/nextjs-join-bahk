@@ -22,7 +22,8 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
 
   useEffect(() => {
     if (userData) {
-      createInvoice();
+      const username = userNameParser();
+      createInvoice(username);
     }
   }, [fee, userData]);
 
@@ -36,7 +37,7 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
 
 
 
-  const createInvoice = async () => {
+  const createInvoice = async (username) => {
     const response = await fetch("api/lnbits", {
       method: "POST",
       headers: {
@@ -44,7 +45,7 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
       },
       body: JSON.stringify({
         amount: parseFloat(fee),
-        memo: `Bitcoin HK Membership Dues for ${userNameParser()}`,
+        memo: `Bitcoin HK Membership Dues for ${username}`,
       }),
     });
     const data = await response.json();
@@ -53,7 +54,6 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
       setPaymentID(data.id);
     }
   };
-
   const openModal = () => {
     setAnimationState("in");
     setModalVisible(true);
