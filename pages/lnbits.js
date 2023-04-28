@@ -9,19 +9,42 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
   const [paymentID, setPaymentID] = useState("");
   const [paid, setPaid] = useState(false);
   const [animationState, setAnimationState] = useState("");
+  const [isInvoiceCreated, setIsInvoiceCreated] = useState(false);
 
   const handleIframeLoad = useCallback((event) => {
     event.target.style.opacity = '1';
   }, []);
 
-  const userNameParser = () => {
-    const username = userData.name || 'Not found';
+  const userNameParser = (userData) => {
+    const username = userData.name || userData.contact || 'Not found';
     return username;
   }
 
+  const createInvoice = async (username) => {
+    const response = await fetch("api/lnbits", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        amount: parseFloat(fee),
+        memo: `Bitcoin HK Membership Dues for ${username}`,
+      }),
+    });
+    const data = await response.json();
+    if (!iframeSrc && userData) {
+      setIframeSrc(`${data.completelink}${data.id}`);
+      setPaymentID(data.id);
+    }
+  };
+
   useEffect(() => {
-    createInvoice();
-  }, [fee]);
+    if (fee && (userData.name || userData.contact) && !isInvoiceCreated) {
+      const username = userNameParser(userData);
+      createInvoice(username);
+      setIsInvoiceCreated(true);
+    }
+  }, [fee, userData, isInvoiceCreated]);
 
   useEffect(() => {
     if (modalVisible) {
@@ -30,26 +53,6 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
       document.body.classList.remove(styles.noScroll);
     }
   }, [modalVisible]);
-
-
-
-  const createInvoice = async () => {
-    const response = await fetch("api/lnbits", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        amount: parseFloat(fee),
-        memo: `Bitcoin HK Membership Dues for ${userNameParser()}`,
-      }),
-    });
-    const data = await response.json();
-    if (!iframeSrc) {
-      setIframeSrc(`${data.completelink}${data.id}`);
-      setPaymentID(data.id);
-    }
-  };
 
   const openModal = () => {
     setAnimationState("in");
