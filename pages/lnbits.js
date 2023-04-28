@@ -15,10 +15,7 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
     event.target.style.opacity = '1';
   }, []);
 
-  const userNameParser = (userData) => {
-    if (!userData) {
-      return 'Not found';
-    }
+  const userNameParser = () => {
     console.log(userData)
     const username = userData.name || userData.contact || 'Not found';
     return username;
@@ -57,6 +54,11 @@ const LNbitsPayment = ({ fee, memberdata, userData }) => {
       document.body.classList.remove(styles.noScroll);
     }
   }, [modalVisible]);
+
+  const openModal = () => {
+    setAnimationState("in");
+    setModalVisible(true);
+  };
 
   const closeModal = async () => {
     setAnimationState("out");
