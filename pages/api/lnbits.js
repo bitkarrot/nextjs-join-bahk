@@ -42,7 +42,7 @@ export default async function handler(req, res) {
           completelinktext: "",
           custom_css: "",
           time: 6000, // use payment_countdown in lib/constants.js
-          amount: 100, //amount * 100000000, //sats conversion
+          amount: amount * 100000000, //sats conversion
           extra:
             '{"mempool_endpoint": "https://mempool.space", "network": "Mainnet"}',
         }),
