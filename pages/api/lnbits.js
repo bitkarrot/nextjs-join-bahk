@@ -26,7 +26,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const { amount, memo } = req.body;
     const response = await fetch(
-      `${LNBITS_BASE_URL}/satspay/api/v1/charge?api-key=${ADMIN_API_KEY}`,
+      `${LNBITS_BASE_URL}/satspay/api/v1/charge`,
       {
         method: "POST",
         headers: {
@@ -54,7 +54,7 @@ export default async function handler(req, res) {
   } else if (req.method === "GET") {
     const { paymentID } = req.query;
     const response = await fetch(
-      `${LNBITS_BASE_URL}/satspay/api/v1/charge/${paymentID}/?api-key=${ADMIN_API_KEY}`,
+      `${LNBITS_BASE_URL}/satspay/api/v1/charge/${paymentID}`,
       {
         method: "GET",
         headers: {
