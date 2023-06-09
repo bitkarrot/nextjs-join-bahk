@@ -5,6 +5,12 @@ To edit your membership fees, year, payment message, and payment timer:
 1. fork this repository,
 2. Create a new branch, edit the values in the ```lib/Contants.js``` file and make a pull request to the master branch.
 
+## One-Click Deploy to Vercel
+
+Just click on the link below and fill in the variables.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbitkarrot%2Fnextjs-join-bahk.git&env=INVOICE_API_KEY,LNBITS_WALLET,SENDGRID_API_KEY,LNBITS_BASE_URL,ON_CHAIN_WALLET)
+
 ## Requirements
 
 See `.env.example` for the specific API keys needed.
