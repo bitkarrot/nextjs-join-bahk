@@ -10,7 +10,6 @@ To edit your membership fees, year, payment message, and payment timer:
 See `.env.example` for the specific API keys needed.
 1. LNBits Wallet information with satspay server integration.
 ```sh
-ADMIN_API_KEY = "";
 INVOICE_API_KEY = "";
 LNBITS_WALLET = "";
 ```
